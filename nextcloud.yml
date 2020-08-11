@@ -1,0 +1,44 @@
+version: '3'
+
+volumes:
+  nextcloud:
+  db:
+
+services:
+  nextcloud-mysql:
+    container_name: nextcloud-mysql
+    image: mysql:5.7
+    volumes:
+      - db:/var/lib/mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: default
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpass
+      VIRTUAL_HOST: http://domain.com
+      LETSENCRYPT_HOST: http://domain.com
+    # ports:
+    #   - '3306:3306'
+    networks:
+      dh-bridge:
+        ipv4_address: 172.29.0.37
+
+  app:
+    container_name: nextcloud-app
+    image: nextcloud
+    ports:
+      - 8026:80
+    links:
+      - nextcloud-mysql
+    volumes:
+      - ./nextcloud:/var/www/html
+      #- ./apache2:/etc/apache2
+    restart: unless-stopped
+    networks:
+      dh-bridge:
+        ipv4_address: 172.29.0.39
+
+networks:
+  dh-bridge:
+    external: true

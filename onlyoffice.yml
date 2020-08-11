@@ -1,0 +1,105 @@
+version: '3'
+services:
+  onlyoffice-mysql-server:
+    container_name: onlyoffice-mysql-server
+    image: mysql:5.7.21
+    environment:
+      - MYSQL_ROOT_PASSWORD=43fih0b7IOgc9F99aNEg
+      - MYSQL_DATABASE=onlyoffice
+      - MYSQL_USER=onlyoffice
+      - MYSQL_PASSWORD=43fih0b7IOgc9F99aNEg
+    networks:
+      dh-bridge:
+        ipv4_address: 172.29.0.40
+    stdin_open: true
+    tty: true
+    restart: always
+    volumes:
+      - ./config/mysql/conf.d:/etc/mysql/conf.d
+      - ./config/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+  # onlyoffice-community-server:
+  #   container_name: onlyoffice-community-server
+  #   image: onlyoffice/communityserver:latest
+  #   depends_on:
+  #    - onlyoffice-mysql-server
+  #   # - onlyoffice-document-server
+  #   environment:
+  #    - ONLYOFFICE_CORE_MACHINEKEY=n7SxaaQh4nzbcUi7Bji7
+  #    #- DOCUMENT_SERVER_PORT_80_TCP_ADDR=onlyoffice-document-server
+  #    - MYSQL_SERVER_ROOT_PASSWORD=43fih0b7IOgc9F99aNEg
+  #    - MYSQL_SERVER_DB_NAME=onlyoffice
+  #    - MYSQL_SERVER_HOST=onlyoffice-mysql-server
+  #    - MYSQL_SERVER_USER=onlyoffice
+  #    - MYSQL_SERVER_PASS=43fih0b7IOgc9F99aNEg
+  #   networks:
+  #     dh-bridge:
+  #       ipv4_address: 172.29.0.45
+  #   ports:
+  #    - '8030:80'
+  #   #  - '8034:443'
+  #   #  - '5222:5222'
+  #   stdin_open: true
+  #   tty: true
+  #   restart: always
+  #   volumes:
+  #    - community_data:/var/www/onlyoffice/Data
+  #    - community_log:/var/log/onlyoffice
+  #    - document_data:/var/www/onlyoffice/DocumentServerData
+  #    #- ./certs:/var/www/onlyoffice/Data/certs
+
+  onlyoffice-document-server:
+    container_name: onlyoffice-document-server
+    image: onlyoffice/documentserver:latest
+    stdin_open: true
+    tty: true
+    restart: always
+    networks:
+      dh-bridge:
+        ipv4_address: 172.29.0.41
+    # expose:
+    #   - '80'
+    #   - '443'
+    ports:
+      - '8202:80'
+      - '8200:443'
+    volumes:
+      - document_data:/var/www/onlyoffice/Data
+      - document_log:/var/log/onlyoffice
+      - document_fonts:/usr/share/fonts/truetype/custom
+      - document_forgotten:/var/lib/onlyoffice/documentserver/App_Data/cache/files/forgotten
+      #- ./document_data:/var/www/onlyoffice
+      #- ./document_log:/var/log/onlyoffice
+      #  - ./document_fonts:/usr/share/fonts/truetype/custom
+      #  - document_forgotten:/var/lib/onlyoffice/documentserver/App_Data/cache/files/forgotten
+      #- ./nginx:/etc/nginx
+      - ./local.json:/etc/onlyoffice/documentserver/local.json
+
+  # office-mysqladmin:
+  #   container_name: office-mysqladmin
+  #   depends_on:
+  #     - onlyoffice-mysql-server
+  #   image: phpmyadmin/phpmyadmin:latest
+  #   restart: unless-stopped
+  #   ports:
+  #     - '8025:80'
+  #   environment:
+  #     PMA_HOST: onlyoffice-mysql-server:3306
+  #     MYSQL_ROOT_PASSWORD: 43fih0b7IOgc9F99aNEg
+  #   networks:
+  #     dh-bridge:
+  #       ipv4_address: 172.29.0.34
+
+networks:
+  dh-bridge:
+    external: true
+
+volumes:
+  document_data:
+  document_log:
+  document_forgotten:
+  document_fonts:
+  # community_data:
+  # community_log:
+  mysql_data:
+  nginx:

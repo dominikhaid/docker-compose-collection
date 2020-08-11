@@ -1,0 +1,44 @@
+version: '3'
+
+networks:
+  elastic:
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.0
+    container_name: elasticsearch
+    restart: unless-stopped
+    networks:
+      - elastic
+    environment:
+      - discovery.type=single-node
+    ports:
+      - 9200:9200
+
+  #do not change http://elasticsearch:9200
+  elastichq:
+    image: elastichq/elasticsearch-hq
+    restart: unless-stopped
+    container_name: elastichq
+    environment:
+      - 'HQ_DEFAULT_URL=http://elasticsearch:9200'
+    networks:
+      - elastic
+    ports:
+      - '5000:5000'
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.5.0
+    container_name: kibana
+    restart: unless-stopped
+    networks:
+      - elastic
+    environment:
+      SERVER_NAME: kibana
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    links:
+      - elasticsearch
+    depends_on:
+      - elasticsearch
+    ports:
+      - 5601:5601
