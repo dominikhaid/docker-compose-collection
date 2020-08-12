@@ -31,7 +31,7 @@ Collection of most popular Docker images ready to use as docker-compose
 - wordpress / good ol wordpress ready to use
 
 ```
-ALL files are ready to run. just change the file name to docker-compose up -d.
+ALL files are ready to run. just change the file name to docker-compose and run docker-compose up -d.
 Some files require to change username or passwords for security reasons.
 ```
 
