@@ -1,0 +1,26 @@
+version: '3'
+services:
+  portainer:
+    image: portainer/portainer:latest
+    container_name: portainer
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./data:/data
+    ports:
+      - '9000:9000'
+    networks:
+      dh-bridge:
+        ipv4_address: 172.29.0.30
+
+networks:
+  dh-bridge:
+    external: true
+
+volumes:
+  portainer_data:

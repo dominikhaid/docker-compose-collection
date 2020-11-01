@@ -29,6 +29,8 @@ Collection of most popular Docker images ready to use as docker-compose
 - postgres & pgAdmin / postgres SQL Database with pgAdmin as webview
 - redis / message store
 - wordpress / good ol wordpress ready to use
+- portainer / manage and monitor docker containers
+- diun / watch and nofity on image realases
 
 ```
 ALL files are ready to run. just change the file name to docker-compose and run docker-compose up -d.

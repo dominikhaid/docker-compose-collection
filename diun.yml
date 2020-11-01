@@ -1,0 +1,45 @@
+version: "3.5"
+
+services:
+  diun:
+    image: crazymax/diun:latest
+    container_name: diun
+    volumes:
+      - "./data:/data"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      - "TZ=Europe/Paris"
+      - "LOG_LEVEL=info"
+      - "LOG_JSON=false"
+      - "DIUN_WATCH_WORKERS=20"
+      - "DIUN_WATCH_SCHEDULE=0 */6 * * *"
+      - "DIUN_PROVIDERS_DOCKER=true"
+      - "DIUN_PROVIDERS_DOCKER_ENDPOINT=unix:///var/run/docker.sock"
+      # - "DIUN_PROVIDERS_DOCKER_TLSCERTSPATH=/certs/"
+      - "DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT=true"
+      #TURN ON TO CREATE REPORT ON FIRST LUNCH
+      # - "DIUN_WATCH_FIRSTCHECKNOTIF=true"
+      # SET THIS TO FALSE WITH NO SSL / TSL
+      - "DIUN_PROVIDERS_DOCKER_TLSVERIFY=false"
+      - "DIUN_PROVIDERS_DOCKER_WATCHSTOPPED=true"
+      - "DIUN_NOTIF_MAIL_HOST=mailhost"
+      - "DIUN_NOTIF_MAIL_PORT=587"
+      - "DIUN_NOTIF_MAIL_SSL=false"
+      - "DIUN_NOTIF_MAIL_INSECURESKIPVERIFY=false"
+      - "DIUN_NOTIF_MAIL_USERNAME=mailuser"
+      - "DIUN_NOTIF_MAIL_PASSWORD=mailuserpassword"
+      - "DIUN_NOTIF_MAIL_FROM=mailsender"
+      - "DIUN_NOTIF_MAIL_TO=mailresever"
+    labels:
+      - "diun.enable=true"
+      - "diun.watch_repo=true"
+    restart: unless-stopped
+
+
+    networks:
+      dh-bridge:
+        ipv4_address: 172.29.0.36
+
+networks:
+  dh-bridge:
+    external: true
