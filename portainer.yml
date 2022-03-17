@@ -3,18 +3,12 @@ services:
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
-    command: --admin-password 'admin'
-    restart: unless-stopped
-    security_opt:
-      - no-new-privileges:true
-    networks:
-      - proxy
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./data:/data
+    command: -H unix:///var/run/docker.sock
     ports:
-      - '9000:9000'
+      - "9000:9000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "portainer_data:/data"
     networks:
       dh-bridge:
         ipv4_address: 172.29.0.30
