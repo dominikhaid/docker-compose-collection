@@ -3,6 +3,7 @@ services:
   portainer:
     image: portainer/portainer-ce:latest
     container_name: portainer
+    command: --admin-password 'admin'
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
