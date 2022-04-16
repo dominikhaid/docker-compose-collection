@@ -1,0 +1,19 @@
+  version: '3.8'
+  services:
+    git:
+      container_name: git-server
+      image: 'gitlab/gitlab-ce:latest'
+      hostname: 'gitlab.example.com'
+      ports:
+        - '8090:80'
+      volumes:
+        - '/srv/gitlab/config:/etc/gitlab'
+        - '/srv/gitlab/logs:/var/log/gitlab'
+        - '/srv/gitlab/data:/var/opt/gitlab'
+      networks:
+        dh-bridge:
+          ipv4_address: 172.29.0.35
+  networks:
+    dh-bridge:
+      external: true
+  #docker exec -it gitlab-ce grep 'Password:' /etc/gitlab/initial_root_password
