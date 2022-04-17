@@ -1,1 +1,8 @@
 data
+log/**
+logs/**
+*.log.*/**
+
+jenkins-ansible/jenkins_compose/jenkins_configuration/logs
+jenkins-ansible/.ssh
+jenkins-ansible/jenkins_compose/jenkins_configuration
