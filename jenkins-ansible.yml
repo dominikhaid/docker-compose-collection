@@ -37,3 +37,8 @@
   networks:
     dh-bridge:
       external: true
+
+  #ansible all --list-hosts
+  #ansible all -a "hostname"
+  #ansible all -m setup
+  #ansible all -a "free -m"

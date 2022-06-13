@@ -1,3 +1,6 @@
+iobrokerdata
+config
+.storage
 data
 log/**
 logs/**

@@ -1,0 +1,17 @@
+version: "3.5"
+services:
+  dashy:
+    container_name: dashy
+    #volumes:
+      #- /root/my-local-conf.yml:/app/public/conf.yml
+    image: lissy93/dashy:latest
+    ports:
+     - "4000:80"
+    restart: unless-stopped
+    networks:
+      dh-bridge:
+        ipv4_address: 172.29.0.65
+
+networks:
+  dh-bridge:
+    external: true
