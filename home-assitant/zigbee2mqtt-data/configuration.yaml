@@ -1,0 +1,60 @@
+homeassistant: true
+permit_join: true
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://mqtt
+serial:
+  port: /dev/ttyACM0
+frontend:
+  port: 8080
+advanced:
+  network_key:
+    - 112
+    - 52
+    - 11
+    - 73
+    - 159
+    - 5
+    - 175
+    - 40
+    - 29
+    - 128
+    - 223
+    - 127
+    - 14
+    - 222
+    - 144
+    - 13
+  log_syslog:
+    app_name: Zigbee2MQTT
+    eol: /n
+    host: localhost
+    localhost: localhost
+    path: /dev/log
+    pid: process.pid
+    port: 123
+    protocol: tcp4
+    type: '5424'
+  channel: 26
+  ext_pan_id:
+    - 33
+    - 117
+    - 141
+    - 25
+    - 0
+    - 75
+    - 18
+    - 0
+  pan_id: 6756
+  elapsed: true
+devices:
+  '0xa4c138c58e9d7d73':
+    friendly_name: Deckenlampe Flur EG
+  '0xa4c1380b9bc98506':
+    friendly_name: Deckenlampe Schlafzimmer 1.OG
+  '0xa4c1386476aa479e':
+    friendly_name: Deckenlampe 1 Living Rom 2.Og
+  '0xa4c138d9489001a0':
+    friendly_name: Deckenlampe 2 Living Room 2.OG
+  '0xa4c138072c643123':
+    friendly_name: Deckenlampe 3 Living Room 2.OG

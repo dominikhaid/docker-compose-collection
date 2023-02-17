@@ -1,0 +1,47 @@
+{
+    "0xa4c138c58e9d7d73": {
+        "color_mode": "color_temp",
+        "state": "OFF",
+        "color_temp": 370,
+        "color_temp_startup": 370,
+        "brightness": 92,
+        "linkquality": 255
+    },
+    "0xa4c1380b9bc98506": {
+        "color_mode": "color_temp",
+        "state": "OFF",
+        "linkquality": 255,
+        "color_temp": 370,
+        "color_temp_startup": 370,
+        "brightness": 18,
+        "power_on_behavior": "previous"
+    },
+    "0xa4c1386476aa479e": {
+        "color_mode": "xy",
+        "linkquality": 255,
+        "state": "OFF",
+        "color": {
+            "x": 0.1355,
+            "y": 0.0399
+        }
+    },
+    "0xa4c138d9489001a0": {
+        "color_mode": "xy",
+        "linkquality": 255,
+        "state": "OFF",
+        "color": {
+            "x": 0.6942,
+            "y": 0.2963
+        }
+    },
+    "0xa4c138072c643123": {
+        "color_mode": "xy",
+        "linkquality": 255,
+        "state": "OFF",
+        "color": {
+            "x": 0.2676,
+            "y": 0.4824
+        },
+        "color_temp_startup": 153
+    }
+}
