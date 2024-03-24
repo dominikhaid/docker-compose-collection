@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  yacht:
+    image: selfhostedpro/yacht
+    container_name: yacht
+    ports:
+      - "3015:8000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock" 
+      - "yacht:/config"
+    networks:
+      system:
+        ipv4_address: 172.29.0.85
+
+networks:
+  system:
+    external: true
+
+volumes:
+  yacht:

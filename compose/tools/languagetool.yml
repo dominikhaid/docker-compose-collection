@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  languagetool:
+    container_name: languagetool
+    image: silviof/docker-languagetool:latest
+    restart: unless-stopped
+    networks:
+      tools:
+        ipv4_address: 172.29.0.45
+
+networks:
+  tools:
+    external: true

@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    command: -H unix:///var/run/docker.sock
+    ports:
+      - "9000:9000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "../volumes/portainer:/data"
+    networks:
+      system:
+        ipv4_address: 172.29.0.30
+
+networks:
+  system:
+    external: true

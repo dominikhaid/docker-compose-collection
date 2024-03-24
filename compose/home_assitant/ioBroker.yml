@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+   iobroker:
+     restart: always
+     image: buanet/iobroker:latest
+     container_name: iobroker
+     hostname: iobroker
+     ports:
+       - "8081:8081"
+       - "1880:1880"
+       - "1883:1883"
+       - "2001:2001"
+       - "2010:2010"
+       - "8082:8082"
+       - "8282:8282" 
+       - "8089:8088"
+       - "8284:8284" 
+       - "33980:33980" 
+       - "37325:37325"
+     volumes:
+       - ../volumes/iobrokerdata:/opt/iobroker
+     networks:
+       - tools

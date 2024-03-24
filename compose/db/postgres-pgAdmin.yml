@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: 'userpass'
+      POSTGRES_USER: 'user'
+      POSTGRES_HOST_AUTH_METHOD: 'password'
+      #POSTGRES_DB: testDb
+    volumes:
+      - postgres_data_local:/var/lib/postgresql/data
+      - postgres_backup_local:/backups
+    ports:
+      - '5432:5432'
+    networks:
+      - db
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@example.com
+      PGADMIN_DEFAULT_PASSWORD: userpass
+    ports:
+      - 8081:80
+    networks:
+      - db
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  postgres_data_local:
+  postgres_backup_local:
