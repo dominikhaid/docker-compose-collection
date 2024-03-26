@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  gitness:
+    container_name: gitness
+    image: 'harness/gitness:latest'
+    hostname: 'localhost:10080'
+    ports:
+      - '10090:3000'
+      - '10022:22'
+#    networks:
+#      - system
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '../volumes/gitness/data:/data'
+    environment:
+      - GITNESS_PRINCIPAL_ADMIN_EMAIL=mail@example.com
+      - GITNESS_PRINCIPAL_ADMIN_PASSWORD=admin
+      - GITNESS_USER_SIGNUP_ENABLED=false
