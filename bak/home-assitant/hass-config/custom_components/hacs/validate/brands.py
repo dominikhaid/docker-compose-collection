@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from custom_components.hacs.enums import HacsCategory
 
-from ..repositories.base import HacsRepository
 from .base import ActionValidationBase, ValidationException
+from ..repositories.base import HacsRepository
 
 URL = "https://brands.home-assistant.io/domains.json"
 

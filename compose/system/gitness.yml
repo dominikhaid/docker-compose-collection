@@ -8,8 +8,8 @@ services:
     ports:
       - '10090:3000'
       - '10022:22'
-#    networks:
-#      - system
+    #    networks:
+    #      - system
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - '../volumes/gitness/data:/data'

@@ -13,7 +13,6 @@ if TYPE_CHECKING:
     from ..base import HacsBase
     from ..repositories.base import HacsRepository
 
-
 DEFAULT_BACKUP_PATH = f"{tempfile.gettempdir()}/hacs_backup/"
 
 
@@ -21,11 +20,11 @@ class Backup:
     """Backup."""
 
     def __init__(
-        self,
-        hacs: HacsBase,
-        local_path: str | None = None,
-        backup_path: str = DEFAULT_BACKUP_PATH,
-        repository: HacsRepository | None = None,
+            self,
+            hacs: HacsBase,
+            local_path: str | None = None,
+            backup_path: str = DEFAULT_BACKUP_PATH,
+            repository: HacsRepository | None = None,
     ) -> None:
         """initialize."""
         self.hacs = hacs
@@ -34,9 +33,9 @@ class Backup:
         self.backup_path = backup_path
         if repository:
             self.backup_path = (
-                tempfile.gettempdir()
-                + f"/hacs_persistent_{repository.data.category}/"
-                + repository.data.name
+                    tempfile.gettempdir()
+                    + f"/hacs_persistent_{repository.data.category}/"
+                    + repository.data.name
             )
         self.backup_path_full = f"{self.backup_path}{self.local_path.split('/')[-1]}"
 

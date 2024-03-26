@@ -2,14 +2,14 @@
 from __future__ import annotations
 
 import asyncio
-from dataclasses import asdict, dataclass, field
-from datetime import timedelta
 import gzip
 import logging
 import math
 import os
 import pathlib
 import shutil
+from dataclasses import asdict, dataclass, field
+from datetime import timedelta
 from typing import TYPE_CHECKING, Any, Awaitable, Callable
 
 from aiogithubapi import (
@@ -80,10 +80,10 @@ class RemovedRepository:
             if data[key] is None:
                 continue
             if key in (
-                "reason",
-                "link",
-                "removal_type",
-                "acknowledged",
+                    "reason",
+                    "link",
+                    "removal_type",
+                    "acknowledged",
             ):
                 self.__setattr__(key, data[key])
 
@@ -285,9 +285,9 @@ class HacsRepositories:
         return repository_id in self._default_repositories
 
     def is_registered(
-        self,
-        repository_id: str | None = None,
-        repository_full_name: str | None = None,
+            self,
+            repository_id: str | None = None,
+            repository_full_name: str | None = None,
     ) -> bool:
         """Check if a repository is registered."""
         if repository_id is not None:
@@ -297,9 +297,9 @@ class HacsRepositories:
         return False
 
     def is_downloaded(
-        self,
-        repository_id: str | None = None,
-        repository_full_name: str | None = None,
+            self,
+            repository_id: str | None = None,
+            repository_full_name: str | None = None,
     ) -> bool:
         """Check if a repository is registered."""
         if repository_id is not None:
@@ -392,8 +392,8 @@ class HacsBase:
             self.log.error("HACS is disabled - %s", reason)
 
         if (
-            reason == HacsDisabledReason.INVALID_TOKEN
-            and self.configuration.config_type == ConfigurationType.CONFIG_ENTRY
+                reason == HacsDisabledReason.INVALID_TOKEN
+                and self.configuration.config_type == ConfigurationType.CONFIG_ENTRY
         ):
             self.configuration.config_entry.state = ConfigEntryState.SETUP_ERROR
             self.configuration.config_entry.reason = "Authentication failed"
@@ -422,10 +422,10 @@ class HacsBase:
 
         def _write_file():
             with open(
-                file_path,
-                mode="w" if isinstance(content, str) else "wb",
-                encoding="utf-8" if isinstance(content, str) else None,
-                errors="ignore" if isinstance(content, str) else None,
+                    file_path,
+                    mode="w" if isinstance(content, str) else "wb",
+                    encoding="utf-8" if isinstance(content, str) else None,
+                    errors="ignore" if isinstance(content, str) else None,
             ) as file_handler:
                 file_handler.write(content)
 
@@ -484,11 +484,11 @@ class HacsBase:
         return json_loads(decode_content(response.data.content))
 
     async def async_github_api_method(
-        self,
-        method: Callable[[], Awaitable[TV]],
-        *args,
-        raise_exception: bool = True,
-        **kwargs,
+            self,
+            method: Callable[[], Awaitable[TV]],
+            *args,
+            raise_exception: bool = True,
+            **kwargs,
     ) -> TV | None:
         """Call a GitHub API method"""
         _exception = None
@@ -514,14 +514,14 @@ class HacsBase:
         return None
 
     async def async_register_repository(
-        self,
-        repository_full_name: str,
-        category: HacsCategory,
-        *,
-        check: bool = True,
-        ref: str | None = None,
-        repository_id: str | None = None,
-        default: bool = False,
+            self,
+            repository_full_name: str,
+            category: HacsCategory,
+            *,
+            check: bool = True,
+            ref: str | None = None,
+            repository_id: str | None = None,
+            default: bool = False,
     ) -> None:
         """Register a repository."""
         if repository_full_name in self.common.skip:
@@ -532,7 +532,7 @@ class HacsBase:
             raise HomeAssistantCoreRepositoryException()
 
         if repository_full_name == "home-assistant/addons" or repository_full_name.startswith(
-            "hassio-addons/"
+                "hassio-addons/"
         ):
             raise AddonRepositoryException()
 
@@ -991,7 +991,7 @@ class HacsBase:
     def async_setup_frontend_endpoint_plugin(self) -> None:
         """Setup the http endpoints for plugins if its not already handled."""
         if self.status.active_frontend_endpoint_plugin or not os.path.exists(
-            self.hass.config.path("www/community")
+                self.hass.config.path("www/community")
         ):
             return
 
@@ -1015,9 +1015,9 @@ class HacsBase:
     def async_setup_frontend_endpoint_themes(self) -> None:
         """Setup the http endpoints for themes if its not already handled."""
         if (
-            self.configuration.experimental
-            or self.status.active_frontend_endpoint_theme
-            or not os.path.exists(self.hass.config.path("themes"))
+                self.configuration.experimental
+                or self.status.active_frontend_endpoint_theme
+                or not os.path.exists(self.hass.config.path("themes"))
         ):
             return
 

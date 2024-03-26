@@ -9,7 +9,7 @@ services:
     ports:
       - '8024:80'
     restart: unless-stopped
-    volumes: ['../volumes/wordpress/:/var/www/html/wordpress']
+    volumes: [ '../volumes/wordpress/:/var/www/html/wordpress' ]
     environment:
       WORDPRESS_DB_HOST: wp-mysql:3306
       WORDPRESS_DB_USER: user

@@ -7,7 +7,7 @@ services:
       - ../volumes/conf.yml:/app/public/conf.yml
     image: lissy93/dashy:latest
     ports:
-     - "4000:80"
+      - "4000:80"
     restart: unless-stopped
     networks:
       tools:

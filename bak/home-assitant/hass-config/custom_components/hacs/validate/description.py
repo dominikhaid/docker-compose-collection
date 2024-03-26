@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from ..repositories.base import HacsRepository
 from .base import ActionValidationBase, ValidationException
+from ..repositories.base import HacsRepository
 
 
 async def async_setup_validator(repository: HacsRepository) -> Validator:

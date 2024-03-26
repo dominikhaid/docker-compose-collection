@@ -1,37 +1,37 @@
- version: '3.7'
+version: '3.7'
 
- services:
-   jenkins:
-     container_name: jenkins
-     image: jenkins-ansible
-     build:
-       context: ../dockerfiles/jenkins-ansible
-     privileged: true
-     user: root
-     ports:
+services:
+  jenkins:
+    container_name: jenkins
+    image: jenkins-ansible
+    build:
+      context: ../dockerfiles/jenkins-ansible
+    privileged: true
+    user: root
+    ports:
       - "8080:8080"
       - "50000:50000"
-     volumes:
-       - ../volumes/jenkins-ansible/.ssh/:/home/jenkins/.ssh
-       - ../volumes/jenkins-ansible/jenkins_compose/jenkins_configuration:/var/jenkins_home
-       - /var/run/docker.sock:/var/run/docker.sock
-     networks:
-       system:
-         ipv4_address: 172.29.0.88
+    volumes:
+      - ../volumes/jenkins-ansible/.ssh/:/home/jenkins/.ssh
+      - ../volumes/jenkins-ansible/jenkins_compose/jenkins_configuration:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      system:
+        ipv4_address: 172.29.0.88
 
-   agent:
-     image: jenkins/ssh-agent:jdk11
-     privileged: true
-     user: root
-     container_name: agent
-     expose:
-       - 22
-     environment:
-       - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCaUdr9EmGXe5KyMakdk4jYWo6kC1hK2kwM3Yq2k1dmllRnR9j7PGb2soHSKrj7/W1GgJnI69cdU97e7H1LTCknB+eVvfOxm2oime98nsobUIgbccN1FKag9FKn7WJw8Dpu28scDqjGZY9aMQuT+3hOHvcCksMFDN539dhUGgpuLNrGtlbXrMG6FfIw1DFku9pwRIv+v0D/Z69S5C+bv+C8ODCPgWZ+FKkNwhLU/aYEb7EF9/3tL7uk7R0O0WloKhPu7FGLT3TzzYRf/lGvi1v+Kr3aAFPQU8vMKoBsUxXauMTNRT+lcQhlmGpRpa/H01AkPf9ffUhWz64WgBIMsfGE60nLat+cH0Bjn4SJidoNIf7TE/zcfk5+ROuNy4MEnXduN6vA1dgppKOsg2wrdGO3RI9duDhSkhNe0n+zCvJUnsaubTGk3rSDw6SG1mbwr0UBtqrp6KhqBCmQE5acpdcxZ1+HPt0D0X3hEmd7KJxIMWas+VEodQjhbNgUDD9Sw8k= dominik@debian-laptop
-     networks:
-       system:
-         ipv4_address: 172.29.0.78
+  agent:
+    image: jenkins/ssh-agent:jdk11
+    privileged: true
+    user: root
+    container_name: agent
+    expose:
+      - 22
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCaUdr9EmGXe5KyMakdk4jYWo6kC1hK2kwM3Yq2k1dmllRnR9j7PGb2soHSKrj7/W1GgJnI69cdU97e7H1LTCknB+eVvfOxm2oime98nsobUIgbccN1FKag9FKn7WJw8Dpu28scDqjGZY9aMQuT+3hOHvcCksMFDN539dhUGgpuLNrGtlbXrMG6FfIw1DFku9pwRIv+v0D/Z69S5C+bv+C8ODCPgWZ+FKkNwhLU/aYEb7EF9/3tL7uk7R0O0WloKhPu7FGLT3TzzYRf/lGvi1v+Kr3aAFPQU8vMKoBsUxXauMTNRT+lcQhlmGpRpa/H01AkPf9ffUhWz64WgBIMsfGE60nLat+cH0Bjn4SJidoNIf7TE/zcfk5+ROuNy4MEnXduN6vA1dgppKOsg2wrdGO3RI9duDhSkhNe0n+zCvJUnsaubTGk3rSDw6SG1mbwr0UBtqrp6KhqBCmQE5acpdcxZ1+HPt0D0X3hEmd7KJxIMWas+VEodQjhbNgUDD9Sw8k= dominik@debian-laptop
+    networks:
+      system:
+        ipv4_address: 172.29.0.78
 
- networks:
-   system:
-     external: true
+networks:
+  system:
+    external: true

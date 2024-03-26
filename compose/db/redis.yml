@@ -5,7 +5,7 @@ services:
     container_name: redis
     image: redis:latest
     restart: unless-stopped
-    command: ['redis-server', '--appendonly', 'yes']
+    command: [ 'redis-server', '--appendonly', 'yes' ]
     hostname: redis
     networks:
       db:

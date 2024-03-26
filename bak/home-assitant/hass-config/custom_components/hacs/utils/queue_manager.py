@@ -7,8 +7,8 @@ from typing import Coroutine
 
 from homeassistant.core import HomeAssistant
 
-from ..exceptions import HacsExecutionStillInProgress
 from .logger import LOGGER
+from ..exceptions import HacsExecutionStillInProgress
 
 _LOGGER = LOGGER
 

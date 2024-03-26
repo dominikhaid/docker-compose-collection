@@ -3,12 +3,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
+import voluptuous as vol
 from homeassistant.components import websocket_api
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.dispatcher import async_dispatcher_connect
-import voluptuous as vol
 
-from ..const import DOMAIN
 from .critical import hacs_critical_acknowledge, hacs_critical_list
 from .repositories import (
     hacs_repositories_add,
@@ -28,6 +27,7 @@ from .repository import (
     hacs_repository_state,
     hacs_repository_version,
 )
+from ..const import DOMAIN
 
 if TYPE_CHECKING:
     from ..base import HacsBase
@@ -68,9 +68,9 @@ def async_register_websocket_commands(hass: HomeAssistant) -> None:
 @websocket_api.require_admin
 @websocket_api.async_response
 async def hacs_subscribe(
-    hass: HomeAssistant,
-    connection: websocket_api.ActiveConnection,
-    msg: dict,
+        hass: HomeAssistant,
+        connection: websocket_api.ActiveConnection,
+        msg: dict,
 ) -> None:
     """Handle websocket subscriptions."""
 
@@ -95,9 +95,9 @@ async def hacs_subscribe(
 @websocket_api.require_admin
 @websocket_api.async_response
 async def hacs_info(
-    hass: HomeAssistant,
-    connection: websocket_api.ActiveConnection,
-    msg: dict[str, Any],
+        hass: HomeAssistant,
+        connection: websocket_api.ActiveConnection,
+        msg: dict[str, Any],
 ) -> None:
     """Return information about HACS."""
     hacs: HacsBase = hass.data.get(DOMAIN)
